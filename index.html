@@ -159,7 +159,7 @@ layout: true
 
 ---
 
-## Web Audio API (1/2)
+## Web Audio API (1/3)
 
 * API JavaScript de haut-niveau permettant le traitement et la synthèse audio dans des applications web
 * Paradigme : un graphe de routage du signal audio construit à l'aide d'`AudioNodes`.
@@ -176,7 +176,7 @@ Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (
 
 ---
 
-## Web Audio API (2/2)
+## Web Audio API (2/3)
 
 * Lecture à l'échantillon sonore près
 * Intégration avec les balises &amp;lt;audio&amp;gt; et &amp;lt;video&amp;gt;, getUserMedia et WebRTC
@@ -187,13 +187,45 @@ Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (
 * Analyses dans les domaines temporel et fréquenciel (pour la visualisation seulement à l'heure actuelle)
 
 
-### Exemples
+---
+
+## Web Audio API (3/3)
+
+* `AudioContext`
+
+* `AudioNode`
+  * Sortie uniquement : `AudioBufferSourceNode`, `MediaElementAudioSourceNode`, `MediaStreamAudioSourceNode`, `OscillatorNode`
+  * Entrée uniquement : `AudioDestinationNode`, `MediaStreamAudioDestinationNode`
+  * Entrée & Sortie : `GainNode`, `DelayNode`, `BiquadFilterNode`, `DynamicsCompressorNode`, `WaveShaperNode`, `PannerNode`, `StereoPannerNode`, `ConvolverNode`, `AnalyserNode`, `ChannelSplitterNode`, `ChannelMergerNode`, `ScriptProcessorNode` <small>(obsolète)</small>, `AudioWorkerNode`
+
+* `AudioParam`
+
+
+???
+AudioContext contient
+* le graph du signal audio <small>(connections entre AudioNodes)</small>
+* les factory pour créer des AudioNodes <small>(GainNode, PannerNode ...)</small>
+* la destination <small>(la sortie audio)</small>
+* le currentTime <small>(utile pour ordonnancer les évènements)</small>
+* le decodeAudioData
+
+AudioParam
+* contrôle un aspect individuel du fonctionnement d'un AudioNode, comme le volume
+* peut être a-rate <small>valeur pour chaque échantillon d'un block</small> ou k-rate <small>valeur utilisée pour l'ensemble du block</small>
+* Méthodes: setValueAtTime(), linearRampToValueAtTime(), exponentialRampToValueAtTime(), setTargetAtTime(), setValueCurveAtTime()
+* peut être connecté à un AudioNode: AudioNode.connect(AudioParam) <small>(en plus de AudioNode.connect(AudioNode))</small>, usage type les LFO
+
+---
+
+
+## Exemples d'applications
 
 [Vocoder](https://webaudiodemos.appspot.com/Vocoder/index.html)
 
 [Midi-synth](http://webaudiodemos.appspot.com/midi-synth/index.html) (Web MIDI API)
 
 ---
+
 
 ## WAC et *sujets sensibles*
 
@@ -306,7 +338,7 @@ Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) - Chrome un
 * Waveform - Affichage
 * Markers - Affichage et édition
 * Segments - Affichage et édition
-* Break Point Functions (aka BPF) - Affichage et édition
+* Break Point Functions (BPF) - Affichage et édition
 * Cursor
 * Zoom/Move
 
