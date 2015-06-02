@@ -27,6 +27,12 @@ Ircam - 4 Juin 2015 - 12h15
 
 Samuel Goldszmidt (APM/CRI) & Norbert Schnell (ISMM)
 
+???
+
+SG : Développeur Web
+
+NS : Chercheur, Designer son et interaction
+
 ---
 
 # Plan
@@ -59,10 +65,20 @@ layout: true
 
 
 2 projets ANR en cours :
-* WAVE (Web Audio Visualisation/Edition) 2012/2015
-* CoSiMa (Collaborative Situated Media, N. Schnell) 2013/2016
+* [WAVE](http://wave.ircam.fr) (Web Audio Visualisation/Edition) 2012/2015
+* [CoSiMa](http://cosima.ircam.fr) (Collaborative Situated Media, N. Schnell) 2013/2016
 
 Organisation de la 1<sup>ère</sup> Web Audio Conference "WAC" Janvier 2015 avec Mozilla et l'Audio Working Group du W3C
+
+???
+
+Musicologie, musicographie numérique
+
+Développement d'outils d'écoute actives (projet Ecoutes signées)
+
+Comment les compositeurs, interprètes ... écoutent.
+
+Exemple prototype communication Flash <=> Max
 
 ---
 
@@ -72,23 +88,46 @@ Organisation de la 1<sup>ère</sup> Web Audio Conference "WAC" Janvier 2015 avec
 #### Pourquoi transférer des savoirs, des technologies, des algorithmes de MAO et d'interactions de l'Ircam vers la plateforme Web ?
 
 * 3 000 000 000 d'utilisateurs - s'adresser au plus grand nombre
-* Browser As An OS (ex. Word → Google Doc), pas d'installation - "TTM" minimal
-* Plateforme partagée, massivement multi-utilisateurs, "temps-réel" et multimédia
-* Nouveaux champs d'expérimentation, de recherche, de retours utilisateurs
+* *Browser As An OS*, pas d'installation - "TTM" minimal
+* Plateforme partagée, multi-utilisateurs, temps réel et multimédia
+* Nouveaux champs d'expérimentation et de recherche
+
+
+???
+
+*Les* technologies Web Audio sont disponibles et accessible à tous
+
+ex. Word → Google Doc
+
+et retours utilisateurs
 
 ---
 
 ## *De l'importance* des standards
 
-Web Audio n'est possible à grand échelle que :
-* si les navigateurs respectent les standards
-* si les standards sont pertinents (répondent à des use-cases)
+Web Audio n'est possible à grande échelle que si :
+* les navigateurs respectent les standards
+* les standards sont pertinents (répondent à des usages)
 
 Jusqu'à présent :
 
-* Utilisation des standards et participation (W3C track Web Audio WWW2015)
-* Participation à l'émergence d'une communauté Web Audio (WAC2015, WAC2016)
-* Adaptation à l'écosystème web (Open source, GitHub Ircam)
+* Adaptation à l'écosystème web - open source et [GitHub Ircam](https://github.com/Ircam-RnD)
+* Utilisation et dissémination des standards (W3C track Web Audio WWW2015) - W3C
+* Participation à l'émergence d'une communauté Web Audio (WAC2015, WAC2016) - Mozilla, W3C, Google
+
+???
+
+W3C, IETF (protocole), ECMA (js)
+
+"Pas d'installation" si :
+* Navigateur installé
+* Navigateur respecte les standards
+
+=> Aller au plus près des standards (utilisation Web Audio API et organisation WAC). Rencontré plusieurs fois W3C, les personnes qui implémentent les standard (keynotes WAC)
+
+Continuer utiliser et faire les standards (proposition de cas d'usages musicaux concrêts)
+
+Et si une "killer app" utilise un standard mal implémenté dans un navigateur => compétition entre constructeur de navigateur => implémentation
 
 ---
 
@@ -102,20 +141,34 @@ layout: true
 
 ## Histoire courte
 
-* ~ 1995 : &amp;lt;bgsound&amp;gt; &amp;lt;applet&amp;gt;
+* ~ 1995 : &amp;lt;bgsound&amp;gt; &amp;lt;embed&amp;gt; &amp;lt;object&amp;gt; &amp;lt;applet&amp;gt;
 * ~ 1997 : Flash
-* ~ 2008 : &amp;lt;audio&amp;gt;
+* ~ 2008 : HTML5 &amp;lt;audio&amp;gt;
 * ~ 2010 : Web Audio API, WebRTC (getUserMedia), WebSocket ...
+
+
+???
+
+* 1995 : &amp;lt;blink&amp;gt; midifile et protocoles propriétaires (RTP, RTSP)
+* 1997 : côté client avec le plugin et côté serveur avec FMS et octobre 2008 Sound API dans Flash pour faire du traitement audio, minimal
+* 2008 : HTML5 &amp;lt;audio&amp;gt;
+* 2010 : HTTP streaming (DASH), WebRTC et WebSockets pour l'échange de données, Wep Audio API (première implémentation Chrome 2011). Web Audio API disponible sur Edge
+
+20 ans après la première possibilité de lire un son dans le navigateur, les standards proposent un ensemble de fonctionnalités primitives pour créer des applications audio temps réel ou non sur le web. Même s'il y a encore des choses qui manquent et à améliorer.
+
 
 ---
 
 ## Web Audio API (1/2)
 
 * API JavaScript de haut-niveau permettant le traitement et la synthèse audio dans des applications web
-* Paradigme : un graphe de routage du signal audio construit à l'aide d'AudioNodes.
+* Paradigme : un graphe de routage du signal audio construit à l'aide d'`AudioNodes`.
 * L'implémentation sous-jacente est en C/C++ mais le traitement directement en JavaScript est possible.
 
-La balise &amp;lt;audio&amp;gt; permet le streaming et le playback audio simple dans les navigateurs récents sans avoir recours à Flash ou QuickTime.
+
+???
+
+La balise audio (HTML5) permet le streaming et le playback audio simple dans les navigateurs récents sans avoir recours à Flash ou QuickTime.
 
 Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (séquenceurs audios, plugin d'effets et synthétiseurs)
 
@@ -130,7 +183,7 @@ Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (
 * Spatialisation du son
 * Moteur de convolution
 * Filtres, Synthèse par distorsion non linéaire (Waveshaper), Oscillateurs
-* Paramètres audios
+* Paramètres audios `AudioParam`
 * Analyses dans les domaines temporel et fréquenciel (pour la visualisation seulement à l'heure actuelle)
 
 
@@ -142,7 +195,7 @@ Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (
 
 ---
 
-## "Web Audio" hot topics (depuis la WAC)
+## WAC et *sujets sensibles*
 
 
 * Comment porter du code existant vers la Web Audio API ? Flash, CSound, PNaCl, Emscripten
@@ -153,20 +206,44 @@ Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (
 * Synthèse sonore et traitement (binaural)
 * Applications : MT5 (séquenceur audio), Tanguy (synthétiseur), Telemeta, Noteflight, Hyperaudio, Lissajous ...
 
+
+???
+
+WAC was the first international conference dedicated to web audio technologies and applications.
+The conference gathered web R&D developers, audio processing scientists, application designers and people involved in web standards.
+The conference addressed research, development, design and standards concerned with emerging audio-related web technologies such as Web Audio API, Web RTC, WebSockets and JavaScript.
+
+
+Web Audio Papers
+Web Audio Talks
+Web Audio Demo/Poster
+Web Audio Gigs
+Plenary session of the W3C Audio Working Group
+
 ---
 
 ## Web Audio API vs. Native: Closing the Gap
 
 Paul Adenot Keynote WAC2015
 
-* Le code natif a de bonnes performances et est flexible
-* Le code écrit avec la Web Audio API se distribue facilement (browserify), est sûr (grâce au bac à sable de la plateforme web) et est très facile.
+* Le code natif a de bonnes **performances** et est **flexible**
+* Le code écrit avec la Web Audio API se **distribue facilement**, est **sûr** et est très **facile**.
 
-Quelques propositions simple pour améliorer les performances web audio :
+Propositions simples pour améliorer les performances Web Audio API :
+
+
+* AudioWorker
+* asm.js
+* SIMD.js
+
+
+???
+browserify
+grâce au bac à sable de la plateforme web
 
 * AudioWorker : plus de frontière de thread à traverser comme les traitements audio et JavaScript seront sur le même thread
-* Utiliser asm.js qui ne produit pas d'objet temporaire à passer au ramasse miette.
-* Utiliser SIMD.js. SIMD (Single Instruction Multiple Data) qui permet de faire des opérations sur des éléments multiples ensemble, et qui a des répercutions interessantes en terme de performance sur le traitement de buffer audio.
+* asm.js, langage intermédiaire constituant un sous-ensemble du langage Javascript, qui ne produit pas d'objet temporaire à passer au ramasse miette.
+* SIMD.js SIMD (Single Instruction Multiple Data) qui permet de faire des opérations sur des éléments multiples ensemble, et qui a des répercutions interessantes en terme de performance sur le traitement de buffer audio.
 
 * Pour les mauvaises nouvelles (denormals, lock-free/wait-free, context-switch), [regardez la vidéo](http://medias.ircam.fr/x2af2f6).
 
@@ -175,15 +252,15 @@ Quelques propositions simple pour améliorer les performances web audio :
 ## Standards W3C liés au Web Audio (1/2)
 
 Audio Working Group
-* Web Audio API (Edge, Firefox, Chrome, Safari, Opera, iOS, Android Chrome)
-* Web Midi API (Chrome, Opera)
+* Web Audio API <small>Tous navigateurs sauf Android Browser</small>
+* Web Midi API <small>Chrome, Opera</small>
 
 Hors working group
-* WebSocket API (Tous navigateurs)
+* WebSocket API <small>Tous navigateurs</small>
 
 Web Real-Time Communications Working Group
-* WebRTC 1.0: Real-time Communication Between Browsers (Firefox, Chrome, Android Browser, Chrome for Android)
-* Media Capture and Streams (getUserMedia) (Edge, Firefox, Chrome, Opera, Android browser, Chrome for android)
+* WebRTC 1.0: Real-time Communication Between Browsers <small>Firefox, Chrome, Android Browser, Chrome for Android</small>
+* Media Capture and Streams (getUserMedia) <small>Edge, Firefox, Chrome, Opera, Android browser, Chrome for android</small>
 * MediaStream Recording
 * Audio output devices API
 * ...
@@ -193,11 +270,11 @@ Web Real-Time Communications Working Group
 ## Standards W3C liés au Web Audio (2/2)
 
 Geolocation Working Group
-* Geolocation API Specification (puis Geolocation API Level 2) (Tous navigateurs)
-* DeviceOrientation Event Specification (Device Orientation et Device Motion API) (Tous navigateurs sauf Safari browser)
+* Geolocation API Specification (puis Geolocation API Level 2) <small>Tous navigateurs</small>
+* DeviceOrientation Event Specification (Device Orientation et Device Motion API) <small>Tous navigateurs sauf Safari</small>
 
 Second Screen Presentation Working Group
-* Presentation API
+* Presentation API <small>Aucun navigateur</small>
 
 ---
 
@@ -224,7 +301,7 @@ Documentation: [wavesjs.github.io](http://wavesjs.github.io)
 
 ## waves.js - UI
 
-Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) (Chrome only)
+Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) - Chrome uniquement
 
 * Waveform - Affichage
 * Markers - Affichage et édition
@@ -239,7 +316,7 @@ Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) (Chrome onl
 
 ---
 
-## waves.js - Audio components
+## waves.js - Audio
 
 * Core: Time Engine, Audio Time Engine
 * Engines, extend Audio Time Engine, in charge of playing sound: Granular Engine, Metronome, Player-engine, Segment-Engine
@@ -250,20 +327,29 @@ Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) (Chrome onl
 
 ### Exemples d’applications
 
+[waves.audio](http://wavesjs.github.io/audio/)
+
 ---
 
-## waves.js - LFO
+## waves.js - LFO <small>(en développement)</small>
 
-LFO est une librairie qui propose une API efficace qui formalise le traitement et l'analyse arbitraire de flux de données (ex. données audio, vidéo, capteurs). En normalisant le format des stream dans son entrée et sa sortie, LFO permet de :
-* analyser et manipuler les données à travers une chaîne de traitement uniforme
-* encapsuler des alogorithmes commun avec une interface unifiéé qui peut être partagées et réutilisée.
+<img src="./media/img/lfo.png" width=100%/>
+
+LFO permet :
+* d'analyser et manipuler les données à travers une chaîne de traitement uniforme
+* d'encapsuler les algorithmes usuels avec une interface unifiée qui peut être partagée et réutilisée
+
+
+???
+LFO est une librairie qui propose une API qui formalise le traitement et l'analyse arbitraire de flux de données (ex. données audio, vidéo, capteurs). En normalisant le format des stream dans son entrée et sa sortie,
+
 
 ---
 
 ## Collective-Soundworks
 a framework for innovative audio and multimedia collaborative use cases. (CoSiMa project)
 
-Exemples d’applications
+### Exemples d’applications
 
 ---
 
