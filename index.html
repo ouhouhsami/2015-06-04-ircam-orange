@@ -215,6 +215,7 @@ AudioParam
 * Méthodes: setValueAtTime(), linearRampToValueAtTime(), exponentialRampToValueAtTime(), setTargetAtTime(), setValueCurveAtTime()
 * peut être connecté à un AudioNode: AudioNode.connect(AudioParam) <small>(en plus de AudioNode.connect(AudioNode))</small>, usage type les LFO
 
+
 ---
 
 
@@ -335,12 +336,12 @@ Documentation: [wavesjs.github.io](http://wavesjs.github.io)
 
 Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) - Chrome uniquement
 
-* Waveform - Affichage
-* Markers - Affichage et édition
-* Segments - Affichage et édition
-* Break Point Functions (BPF) - Affichage et édition
-* Cursor
-* Zoom/Move
+* `Waveform` - Affichage
+* `Markers` - Affichage et édition
+* `Segments` - Affichage et édition
+* `BreakPointFunctions` (BPF) - Affichage et édition
+* `Cursor`
+* `Zoom`/`Move`
 
 ### Exemples d’applications
 
@@ -350,16 +351,18 @@ Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) - Chrome un
 
 ## waves.js - Audio
 
-* Core: Time Engine, Audio Time Engine
-* Engines, extend Audio Time Engine, in charge of playing sound: Granular Engine, Metronome, Player-engine, Segment-Engine
-* Masters, in charge of controling the playback and scheduling of engines:
-  * Play Control "start, pause, stop" - extends Time Engine to provide playback control of a Time Engine instance
-  * Scheduler (Simple-Scheduler)
-  * Transport (Provides synchronized scheduling of Time Engine instances)
+* Moteurs, jouent l'audio : `GranularEngine`, `Metronome`, `PlayerEngine`, `SegmentEngine`
+* Maîtres, contrôlent la lecture des moteurs :
+  * `PlayControl`, *start - pause - stop - seek - speed ...* pour contrôler la lecture des moteurs audio
+  * `Scheduler`, ordonnance/commande la lecture des moteurs audios
+  * `Transport`, synchronise la lecture de Moteurs ensemble
 
 ### Exemples d’applications
 
 [waves.audio](http://wavesjs.github.io/audio/)
+
+???
+Moteurs : créent un buffer et le jouent
 
 ---
 
@@ -379,7 +382,7 @@ LFO est une librairie qui propose une API qui formalise le traitement et l'analy
 ---
 
 ## Collective-Soundworks
-a framework for innovative audio and multimedia collaborative use cases. (CoSiMa project)
+Un framework pour la création d'applications audio et multimédia collaboratives (CoSiMa project)
 
 ### Exemples d’applications
 
@@ -395,7 +398,7 @@ layout: true
 
 ## Tranferts de technologies
 * Réinventer / Réécrire dans les langages du Web
-* Utiliser des technologies Emscripten (LLVM → JavaScript avec ASM.js)
+* Utiliser des technologies Emscripten (LLVM → JavaScript avec asm.js)
 
 ---
 
