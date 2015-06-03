@@ -38,7 +38,7 @@ NS : Chercheur, Designer son et interaction
 # Plan
 
 1. Ircam → Web Audio
-2. Web Audio technologies et standards
+2. Web Audio technologies, standards et faits
 3. Ircam Web Audio librairies et framework
 4. Prochaines étapes et perspectives à venir
 
@@ -125,7 +125,7 @@ W3C, IETF (protocole), ECMA (js)
 
 => Aller au plus près des standards (utilisation Web Audio API et organisation WAC). Rencontré plusieurs fois W3C, les personnes qui implémentent les standard (keynotes WAC)
 
-Continuer utiliser et faire les standards (proposition de cas d'usages musicaux concrêts)
+Continuer utiliser et faire les standards (proposition de cas d'usages musicaux concrêts, ex. hier accepté le progress callback, modification du noeud biquad filter en cours ...)
 
 Et si une "killer app" utilise un standard mal implémenté dans un navigateur => compétition entre constructeur de navigateur => implémentation
 
@@ -141,10 +141,13 @@ layout: true
 
 ## Histoire courte
 
-* ~ 1995 : &amp;lt;bgsound&amp;gt; &amp;lt;embed&amp;gt; &amp;lt;object&amp;gt; &amp;lt;applet&amp;gt;
-* ~ 1997 : Flash
-* ~ 2008 : HTML5 &amp;lt;audio&amp;gt;
-* ~ 2010 : Web Audio API, WebRTC (getUserMedia), WebSocket ...
+~ 1995 : &amp;lt;bgsound&amp;gt; &amp;lt;embed&amp;gt; &amp;lt;object&amp;gt; &amp;lt;applet&amp;gt;
+<br>
+~ 1997 : Flash - player et Flash Media Server
+<br>
+~ 2008 : HTML5 &amp;lt;audio&amp;gt;
+<br>
+~ 2010 : Web Audio API, WebRTC (getUserMedia), WebSocket ...
 
 
 ???
@@ -161,6 +164,8 @@ layout: true
 
 ## Web Audio API (1/3)
 
+<img src="./media/img/webaudio-js.png" height="250px" style="float:left;margin-right:40px" />
+
 * API JavaScript de haut-niveau permettant le traitement et la synthèse audio dans des applications web
 * Paradigme : un graphe de routage du signal audio construit à l'aide d'`AudioNodes`.
 * L'implémentation sous-jacente est en C/C++ mais le traitement directement en JavaScript est possible.
@@ -175,29 +180,32 @@ Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (
 ... et tout ce que l'on peut imaginer comme application musicale dans un environment massivement multimédia, multi-utilisateurs !
 
 ---
-
 ## Web Audio API (2/3)
 
+<img src="./media/img/webaudio-js.png" height="250px" style="float:left;margin-right:40px" />
 * Lecture à l'échantillon sonore près
-* Intégration avec les balises &amp;lt;audio&amp;gt; et &amp;lt;video&amp;gt;, getUserMedia et WebRTC
+* Intégration avec &amp;lt;audio&amp;gt;, &amp;lt;video&amp;gt;, getUserMedia et WebRTC
 * Spatialisation du son
 * Moteur de convolution
-* Filtres, Synthèse par distorsion non linéaire (Waveshaper), Oscillateurs
+* Filtres, *Waveshaper*, Oscillateurs
 * Paramètres audios `AudioParam`
-* Analyses dans les domaines temporel et fréquenciel (pour la visualisation seulement à l'heure actuelle)
+* Analyses dans les domaines temporel et fréquenciel
 
+???
+
+Synthèse par distorsion non linéaire
+
+* Analyses dans les domaines temporel et fréquenciel *pour la visualisation seulement à l'heure actuelle*
 
 ---
 
 ## Web Audio API (3/3)
 
 * `AudioContext`
-
 * `AudioNode`
   * Sortie uniquement : `AudioBufferSourceNode`, `MediaElementAudioSourceNode`, `MediaStreamAudioSourceNode`, `OscillatorNode`
   * Entrée uniquement : `AudioDestinationNode`, `MediaStreamAudioDestinationNode`
   * Entrée & Sortie : `GainNode`, `DelayNode`, `BiquadFilterNode`, `DynamicsCompressorNode`, `WaveShaperNode`, `PannerNode`, `StereoPannerNode`, `ConvolverNode`, `AnalyserNode`, `ChannelSplitterNode`, `ChannelMergerNode`, `ScriptProcessorNode` <small>(obsolète)</small>, `AudioWorkerNode`
-
 * `AudioParam`
 
 
@@ -221,10 +229,12 @@ AudioParam
 
 ## Exemples d'applications
 
-[Vocoder](https://webaudiodemos.appspot.com/Vocoder/index.html)
+[<img src="./media/img/vocoder.png" height="220px" style="float:left;margin-right:10px" />](https://webaudiodemos.appspot.com/Vocoder/index.html)
 
-[Midi-synth](http://webaudiodemos.appspot.com/midi-synth/index.html) (Web MIDI API)
+[<img src="./media/img/synth.png" height="220px" />](http://webaudiodemos.appspot.com/midi-synth/index.html)
 
+* Vocoder : getUserMedia + Web Audio API
+* Synthétiseur : Web Midi API + Web Audio API
 ---
 
 
@@ -255,7 +265,7 @@ Plenary session of the W3C Audio Working Group
 
 ---
 
-## Web Audio API vs. Native: Closing the Gap
+## *Web Audio API vs. Native: Closing the Gap*
 
 Paul Adenot Keynote WAC2015
 
@@ -324,7 +334,7 @@ layout: true
 Une librairie pour faciliter le développement d'applications Web Audio (projet WAVE)
 
 
-* UI : Affichage des représentations temporelles
+* UI : Affichage et édition de données temporelles
 * Audio : Moteur audio et ordonnanceur
 * LFO : Chaîne de traitement audio
 
@@ -334,18 +344,11 @@ Documentation: [wavesjs.github.io](http://wavesjs.github.io)
 
 ## waves.js - UI
 
-Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) - Chrome uniquement
+Affichage et édition de données temporelles : `Waveform`, `Markers`, `Segments`, `BreakPointFunctions` (BPF) au sein d'une `Timeline` avec des possiblités de `Zoom`/`Move` et ajout de `Cursor`
 
-* `Waveform` - Affichage
-* `Markers` - Affichage et édition
-* `Segments` - Affichage et édition
-* `BreakPointFunctions` (BPF) - Affichage et édition
-* `Cursor`
-* `Zoom`/`Move`
+<img src="./media/img/waves.ui.png" height="140px" />
 
-### Exemples d’applications
-
-[Blocs Gigognes Philippe Leroux](http://wave.ircam.fr/demo/projects/blocs-gigognes/), [Opus 27 Anton Webern](http://wave.ircam.fr/demo/projects/webern-opus-27/), [Luna Park Georges Aperghis](http://wave.ircam.fr/demo/luna-park/), [Bachothèque J.-S Bach](http://wave.ircam.fr/demo/projects/bachotheque/)
+[waves.js UI](http://wavesjs.github.io/examples/01-ui-what-you-can-do-with-it.html)
 
 ---
 
@@ -357,9 +360,9 @@ Présentation: [WAC waves.ui](http://ircam-rnd.github.io/wac-slides) - Chrome un
   * `Scheduler`, ordonnance/commande la lecture des moteurs audio
   * `Transport`, synchronise/coordonne la lecture de moteurs audio
 
-### Exemples d’applications
+<img src="./media/img/waves.audio.png" height="140px" />
 
-[waves.audio](http://wavesjs.github.io/audio/)
+[waves.js Audio](http://wavesjs.github.io/audio/)
 
 ???
 Moteurs : créent un buffer et le jouent
@@ -368,7 +371,7 @@ Moteurs : créent un buffer et le jouent
 
 ## waves.js - LFO <small>(en développement)</small>
 
-<img src="./media/img/lfo.png" width=100%/>
+<img src="./media/img/lfo.png" height=140px/>
 
 LFO permet :
 * d'analyser et manipuler les données à travers une chaîne de traitement uniforme
@@ -378,6 +381,29 @@ LFO permet :
 ???
 LFO est une librairie qui propose une API qui formalise le traitement et l'analyse arbitraire de flux de données (ex. données audio, vidéo, capteurs). En normalisant le format des stream dans son entrée et sa sortie,
 
+---
+
+<img src="./media/img/leroux.mvt4.png" width=80%/>
+
+["Blocs Gigognes", analyse du 4e mouvement de *Voi(rex)* de P. Leroux](http://wave.ircam.fr/demo/projects/blocs-gigognes/)
+
+---
+
+<img src="./media/img/webern.opus27.png" width=90%/>
+
+[Analyse *Opus 27* de Anton Webern par E. Ducreux](http://wave.ircam.fr/demo/projects/webern-opus-27/)
+---
+
+<img src="./media/img/luna-park.aperghis.png" width=100%/>
+
+[Analyse *Luna Park* de Georges Aperghis par J.-F Trubert](http://wave.ircam.fr/demo/luna-park/)
+
+---
+
+<img src="./media/img/bachotheque.png" width=90%/>
+
+
+["Bachothèque" J.-S Bach](http://wave.ircam.fr/demo/projects/bachotheque/)
 
 ---
 
@@ -396,15 +422,22 @@ layout: true
 
 ---
 
-## Tranferts de technologies
-* Réinventer / Réécrire dans les langages du Web
-* Utiliser des technologies Emscripten (LLVM → JavaScript avec asm.js)
+## Tranferts de technologies - savoirs - compétences
+* Réécrire dans les langages du Web
+* Utiliser des technologies comme Emscripten (LLVM → JavaScript avec asm.js)
+
+???
+Réinventer - ou réécrire
 
 ---
 
 ## Open source <strike>vs.</strike> et Open data
 
-Mettre à disposition des résultats d'alogorithmes issus de la recherche sans mettre à disposition le code source et en bénéficiant de serveurs de calculs adaptés.
+Mettre à disposition des résultats d'algorithmes issus de la recherche ...
+<br>
+... sans mettre à disposition le code source ...
+<br>
+... et en bénéficiant de serveurs de calculs adaptés.
 
 ---
 
@@ -414,24 +447,18 @@ Mettre à disposition des résultats d'alogorithmes issus de la recherche sans m
 * W3C Standards :
   * performance timing, synchronisation d'appareils connectés
   * latences des appareils
-* Implémentations standards :
-  * Web RTC iOS, pas de date
-  * ✓ Edge Web Audio API
 * JavaScript :
   * ES2015 (class, modules, promises, generator etc.)
-  * ES7 ("code non bloquant comme du code bloquant")
+  * ES7 (async, await)
+* Implémentations des standards :
+  * Web RTC iOS, pas de date
+  * ✓ Edge Web Audio API
+
 
 ## Human-computer interaction, and the digital arts
 
----
-
-layout: true
-class: center, middle
-
-# Fin (ou début ?!)
-
----
-
+???
+ECrire du "code non bloquant comme du code bloquant"
 
 
     </textarea>
