@@ -23,7 +23,7 @@ class: center, middle
 
 # Web Audio & Applications
 
-Ircam - 4 Juin 2015 - 12h15
+Ircam - 4 Juin 2015
 
 Samuel Goldszmidt (APM/CRI) & Norbert Schnell (ISMM)
 
@@ -177,7 +177,7 @@ La balise audio (HTML5) permet le streaming et le playback audio simple dans les
 
 Mais ce n'est pas suffisant pour les jeux, les applications audio interactives (séquenceurs audios, plugin d'effets et synthétiseurs)
 
-... et tout ce que l'on peut imaginer comme application musicale dans un environment massivement multimédia, multi-utilisateurs !
+... et tout ce que l'on peut imaginer comme application musicale dans un environment massivement multimédia, multi-utilisateurs et collaboratif !
 
 ---
 ## Web Audio API (2/3)
@@ -267,7 +267,7 @@ Plenary session of the W3C Audio Working Group
 
 ## *Web Audio API vs. Native: Closing the Gap*
 
-Paul Adenot Keynote WAC2015
+Paul Adenot (Mozilla) - Keynote WAC2015
 
 * Le code natif a de bonnes **performances** et est **flexible**
 * Le code écrit avec la Web Audio API se **distribue facilement**, est **sûr** et est très **facile**.
@@ -340,6 +340,10 @@ Une librairie pour faciliter le développement d'applications Web Audio (projet 
 
 Documentation: [wavesjs.github.io](http://wavesjs.github.io)
 
+???
+
+Aborde les questions que la Web Audio API et d'autres standards ne résolvent pas.
+
 ---
 
 ## waves.js - UI
@@ -350,14 +354,22 @@ Affichage et édition de données temporelles : `Waveform`, `Markers`, `Segments
 
 [waves.js UI](http://wavesjs.github.io/examples/01-ui-what-you-can-do-with-it.html)
 
+???
+
+ex. HTML5 input type, pas d'affichage de waveform
+Avec HTML5, de nouvelles API et de nouveau type d'input (color, range, number)
+Mais rien pour pour waveform et les timeline.
+
+Modulaire, commandé par les données, SVG
+
 ---
 
 ## waves.js - Audio
 
-* Moteurs, jouent l'audio : `GranularEngine`, `Metronome`, `PlayerEngine`, `SegmentEngine`
+* Moteurs, jouent l'audio : `PlayerEngine`, `GranularEngine`, `SegmentEngine`
 * Maîtres, contrôlent les moteurs :
   * `PlayControl`, *start - pause - stop - seek - speed ...* pour contrôler la lecture des moteurs audio
-  * `Scheduler`, ordonnance/commande la lecture des moteurs audio
+  * `Scheduler`, ordonnance/commande la lecture de moteurs audio
   * `Transport`, synchronise/coordonne la lecture de moteurs audio
 
 <img src="./media/img/waves.audio.png" height="140px" />
@@ -365,7 +377,15 @@ Affichage et édition de données temporelles : `Waveform`, `Markers`, `Segments
 [waves.js Audio](http://wavesjs.github.io/audio/)
 
 ???
+
+ex. Web Audio API : l'ordonnancement des évènements pour des applications
+ audio interactives (notamment la lecture audio) peut être très complexe à gérer.
+
 Moteurs : créent un buffer et le jouent
+
+1. Granular
+2. Segment
+3. Transport
 
 ---
 
@@ -377,6 +397,7 @@ LFO permet :
 * d'analyser et manipuler les données à travers une chaîne de traitement uniforme
 * d'encapsuler les algorithmes usuels avec une interface unifiée qui peut être partagée et réutilisée
 
+Applications : analyse/descripteurs/segmentation audio, analyse de données de captation de mouvement
 
 ???
 LFO est une librairie qui propose une API qui formalise le traitement et l'analyse arbitraire de flux de données (ex. données audio, vidéo, capteurs). En normalisant le format des stream dans son entrée et sa sortie,
@@ -410,7 +431,8 @@ LFO est une librairie qui propose une API qui formalise le traitement et l'analy
 ## Collective-Soundworks
 Un framework pour la création d'applications audio et multimédia collaboratives (CoSiMa project)
 
-### Exemples d’applications
+[Soundworks](http://github.com/collective-soundworks/soundworks)
+
 
 ---
 
@@ -443,16 +465,16 @@ Mettre à disposition des résultats d'algorithmes issus de la recherche ...
 
 ## Technologies
 
-* Web Audio API : AudioWorker
+
 * W3C Standards :
-  * performance timing, synchronisation d'appareils connectés
-  * latences des appareils
+  * Web Audio API : AudioWorker
+  * Performance timing, synchronisation d'appareils connectés
+  * Latences des appareils
+  * Implémentations des standards : Web RTC iOS, ✓ Edge Web Audio API
 * JavaScript :
   * ES2015 (class, modules, promises, generator etc.)
   * ES7 (async, await)
-* Implémentations des standards :
-  * Web RTC iOS, pas de date
-  * ✓ Edge Web Audio API
+
 
 
 ## Human-computer interaction, and the digital arts
